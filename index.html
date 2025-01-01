@@ -4,18 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="calculator">
-        <button value="1"> 1 </button>
-        <button value="2"> 2 </button>
-        <button value="3"> 3 </button>
-        <button value="4"> 4 </button>
-        <button value="5"> 5 </button>
-        <button value="6"> 6 </button>
-        <button value="7"> 7 </button>
-        <button value="8"> 8 </button>
-        <button value="9"> 9 </button>
+        <div id="display"> 
+            
+        </div>
+        <div id="container">
+            <div id="first-row">
+                <button id="clear">AC</button>
+                <button id="percent">%</button>
+                <button id="sign">±</button>
+                <button class="operator">÷</button>
+            </div>
+
+            <div id="button-pad">
+                <div id="number-pad">
+                    <div id="nums">
+                        <button class="number" value="1"> 1 </button>
+                        <button class="number" value="2"> 2 </button>
+                        <button class="number" value="3"> 3 </button>
+                        <button class="number" value="4"> 4 </button>
+                        <button class="number" value="5"> 5 </button>
+                        <button class="number" value="6"> 6 </button>
+                        <button class="number" value="7"> 7 </button>
+                        <button class="number" value="8"> 8 </button>
+                        <button class="number" value="9"> 9 </button>
+                    </div>
+                    <div id="bottom-row">
+                        <button class="number" value="0" style="flex: 2;"> 0 </button>
+                        <button id="decimal">.</button>
+                    </div>
+                </div>
+                <div id="operator-pad">
+                    <button class="operator">+</button>
+                    <button class="operator">-</button>
+                    <button class="operator">×</button>
+                    <button class="operator">=</button>
+                </div>
+            </div>
+        </div>
+      
     </div>
 </body>
 </html>

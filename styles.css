@@ -1,0 +1,100 @@
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+#calculator{
+    margin: 50px;
+    height: 620px;
+    width: 500px;
+    background-color: rgb(38,41,47);
+    display: flex;
+    flex-direction: column;
+    border-radius:10px;
+    gap: 40px;
+    border: 2px solid black;
+    
+
+
+}
+#display{
+   
+    height: 120px;
+    width: 480px;
+    margin: 8px;
+    padding: 20px;
+    border-radius:10px;
+    border: 2px solid white;
+    display: flex;
+    color: white;
+    font-size: 72px;
+    justify-content: right;
+    font-family: Arial;
+
+}
+
+#first-row{
+    display: flex;
+    gap: 5px;
+    padding: 5px 10px;
+}
+#button-pad{
+    display: flex;
+    gap: 5px;
+}
+#number-pad{
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#nums{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+#last-row{
+    display: flex;
+    gap: 5px;
+}
+
+button{
+    height: 80px;
+    width: 115px;
+    border-radius: 5px;
+    gap: 5px;
+    font-size: 48px;
+    color: white;
+
+}
+
+#operator-pad {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 10px;
+    
+}
+
+#bottom-row{
+    display: flex;
+    gap: 5px
+}
+.number{
+    background-color: rgb(75,78,84);
+}
+
+.operator{
+    background-color: rgb(246,150,0);
+}
+
+#clear, #percent, #sign, #decimal{
+    background-color: rgb(109,109,112);
+}
