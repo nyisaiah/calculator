@@ -9,14 +9,14 @@
 <body>
     <div id="calculator">
         <div id="display"> 
-            
+            0
         </div>
         <div id="container">
             <div id="first-row">
                 <button id="clear">AC</button>
                 <button id="percent">%</button>
                 <button id="sign">±</button>
-                <button class="operator">÷</button>
+                <button class="operator" value="/">÷</button>
             </div>
 
             <div id="button-pad">
@@ -34,18 +34,19 @@
                     </div>
                     <div id="bottom-row">
                         <button class="number" value="0" style="flex: 2;"> 0 </button>
-                        <button id="decimal">.</button>
+                        <button id="decimal" value=".">.</button>
                     </div>
                 </div>
                 <div id="operator-pad">
-                    <button class="operator">+</button>
-                    <button class="operator">-</button>
-                    <button class="operator">×</button>
-                    <button class="operator">=</button>
+                    <button class="operator" value="+">+</button>
+                    <button class="operator" value="-">-</button>
+                    <button class="operator" value="*">×</button>
+                    <button class="operator" value="=">=</button>
                 </div>
             </div>
         </div>
       
     </div>
+    <script src="calculator.js"> </script>
 </body>
 </html>
