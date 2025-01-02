@@ -12,7 +12,7 @@ function divide(a,b){
     if(b === 0) return "ERROR";
     else return a/b;
 }
-function checkCurrentNumber(){
+function getCurrentNumber(){
     if(firstNumber.active){
         return firstNumber
     }
@@ -29,9 +29,27 @@ function switchNumber(){
         firstNumber.active = true
     }
 }
-function displayCalculation(number){
-    if(number.length > 11 && (Number(number) >= 1e11 || Number(number) <=1e-11)) display.textContent = String(Number(number).toExponential(2)).substring(0,11);
-    else display.textContent = number.substring(0,11);
+function displayCalculation(number) {
+    const num = Number(number);
+
+    // Check if the number is an integer or fits within 11 characters as a decimal
+    if (
+        number.length <= 11 &&
+        (Math.abs(num) < 1e11 && Math.abs(num) > 1e-11 || num === 0)
+    ) {
+        display.textContent = number; // Display as is
+    } else if (num % 1 !== 0) {
+        // Handle repeating decimals by converting them to fixed-point notation
+        const fixedNumber = num.toFixed(11); // Ensure up to 11 decimal places
+        if (fixedNumber.length <= 11) {
+            display.textContent = fixedNumber; // Display if it fits within 11 characters
+        } else {
+            display.textContent = fixedNumber.substring(0, 11); // Trim to fit
+        }
+    } else {
+        // Default to scientific notation for very large/small numbers
+        display.textContent = num.toExponential(2).substring(0, 11);
+    }
 }
 function operate(a, b, operand){
     switch (operand){
@@ -45,6 +63,19 @@ function operate(a, b, operand){
             return String(divide(a,b));
     }
     
+}
+
+function getState(number){
+    const num = Number(number.value);
+    if (num < 0){
+        number.negative = true;
+    }
+    else number.negative = false;
+
+    if (num % 1 === 0){
+        number.decimal = false;
+    }
+    else number.decimal = true;
 }
 
 let firstNumber = {
@@ -69,11 +100,12 @@ const numberPad = document.querySelector(`#number-pad`)
 const display = document.querySelector("#display")
 const operators = document.querySelectorAll(".operator")
 const clearButton = document.querySelector("#clear")
+const signButton = document.querySelector("#sign")
 console.log(Array.from(operators))
 numberPad.addEventListener('click', (event) => {
     
     let target = event.target
-    let currentNumber = checkCurrentNumber()
+    let currentNumber = getCurrentNumber()
     if (currentNumber.value == "0" && target.value != undefined) {
         if(target.value == "."){
             currentNumber.value += target.value;
@@ -104,7 +136,7 @@ numberPad.addEventListener('click', (event) => {
 
 operators.forEach(function(operator) {
     operator.addEventListener("click", ()=> {
-        let currentNumber = checkCurrentNumber()
+        let currentNumber = getCurrentNumber()
         
         if (currentNumber == firstNumber){
             console.log("working with the first number")
@@ -129,10 +161,9 @@ operators.forEach(function(operator) {
                 console.log(result)
                 displayCalculation(result)
                 firstNumber.value = result;
-                if(Number(firstNumber < 0)){
-                    firstNumber.negative = true;
-                }
                 secondNumber.value = "0";
+                getState(firstNumber)
+                getState(secondNumber)
                 switchNumber();
             }
             else {
@@ -140,10 +171,9 @@ operators.forEach(function(operator) {
                 console.log(result)
                 displayCalculation(result)
                 firstNumber.value = result;
-                if(Number(firstNumber < 0)){
-                    firstNumber.negative = true;
-                }
                 secondNumber.value = "0";
+                getState(firstNumber)
+                getState(secondNumber)
                 currentOperator = operator.value;
 
             }
@@ -157,26 +187,41 @@ operators.forEach(function(operator) {
             console.log(currentNumber.value)
         }
         lastButtonNumber = false;
-        console.log(lastButtonNumber)
+        console.table(getCurrentNumber())
     })
 })
 
 clearButton.addEventListener('click', () => {
-    firstNumber = {
-        name: "first",
-        value: "0",
-        active: true,
-        decimal: false,
-        negative: false
-    }
-
-    secondNumber = {
-        name: "second",
-        value: "0",
-        active: false,
-        decimal: false,
-        negative: false
-    }
+      firstNumber.name = "first";
+      firstNumber.value = "0";
+      firstNumber.active = true;
+      firstNumber.decimal = false;
+      firstNumber.negative = false;
+  
+      secondNumber.name = "second";
+      secondNumber.value = "0";
+      secondNumber.active = false;
+      secondNumber.decimal = false;
+      secondNumber.negative = false;
 
     displayCalculation(firstNumber.value)
 })
+
+signButton.addEventListener('click',() => {
+    let currentNumber = getCurrentNumber()
+    
+    if (currentNumber.value == 0) return;
+
+    else if(currentNumber.negative){
+        currentNumber.negative = false
+        currentNumber.value = currentNumber.value.substring(1)
+        displayCalculation(currentNumber.value)
+    }
+
+    else {
+        currentNumber.negative = true
+        currentNumber.value = "-" + currentNumber.value
+        displayCalculation(currentNumber.value)
+    }
+    console.table(currentNumber)
+}) 
