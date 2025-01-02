@@ -101,6 +101,7 @@ const display = document.querySelector("#display")
 const operators = document.querySelectorAll(".operator")
 const clearButton = document.querySelector("#clear")
 const signButton = document.querySelector("#sign")
+const percentButton = document.querySelector("#percent")
 console.log(Array.from(operators))
 numberPad.addEventListener('click', (event) => {
     
@@ -225,3 +226,13 @@ signButton.addEventListener('click',() => {
     }
     console.table(currentNumber)
 }) 
+
+percentButton.addEventListener('click', () => {
+    console.log("clicked")
+    let currentNumber = getCurrentNumber()
+    console.log(currentNumber.name)
+    const num = Number(currentNumber.value)/100
+    currentNumber.value = String(num)
+    displayCalculation(String(currentNumber.value))
+    getState(currentNumber)
+})
