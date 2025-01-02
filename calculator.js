@@ -68,6 +68,7 @@ let lastButtonNumber = false
 const numberPad = document.querySelector(`#number-pad`)
 const display = document.querySelector("#display")
 const operators = document.querySelectorAll(".operator")
+const clearButton = document.querySelector("#clear")
 console.log(Array.from(operators))
 numberPad.addEventListener('click', (event) => {
     
@@ -158,4 +159,24 @@ operators.forEach(function(operator) {
         lastButtonNumber = false;
         console.log(lastButtonNumber)
     })
+})
+
+clearButton.addEventListener('click', () => {
+    firstNumber = {
+        name: "first",
+        value: "0",
+        active: true,
+        decimal: false,
+        negative: false
+    }
+
+    secondNumber = {
+        name: "second",
+        value: "0",
+        active: false,
+        decimal: false,
+        negative: false
+    }
+
+    displayCalculation(firstNumber.value)
 })
